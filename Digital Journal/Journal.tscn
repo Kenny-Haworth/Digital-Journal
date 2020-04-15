@@ -1,0 +1,505 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fonts/Custom Font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Journal.gd" type="Script" id=2]
+[ext_resource path="res://fonts/Romanica-Bg4l.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Add a New Memory.gd" type="Script" id=4]
+[ext_resource path="res://Home/Home.gd" type="Script" id=5]
+[ext_resource path="res://Home/Memory_Preview.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Add a New Memory/Media.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 26
+font_data = ExtResource( 3 )
+
+[node name="Journal" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Backdrop" type="ColorRect" parent="."]
+margin_left = 1.84088
+margin_top = -2.29278
+margin_right = 1921.84
+margin_bottom = 1077.71
+color = Color( 0.0745098, 0, 0.501961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Home" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="Backgrounds" type="Control" parent="Home"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Border" type="ColorRect" parent="Home/Backgrounds"]
+margin_left = 46.0
+margin_top = 100.772
+margin_right = 1873.0
+margin_bottom = 966.772
+color = Color( 0.396078, 0.380392, 0.501961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Backdrop" type="ColorRect" parent="Home/Backgrounds"]
+margin_left = 64.0
+margin_top = 116.0
+margin_right = 1858.0
+margin_bottom = 949.0
+color = Color( 0.541176, 0.458824, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Horizontal" type="ColorRect" parent="Home/Backgrounds"]
+margin_left = 61.3604
+margin_top = 179.441
+margin_right = 1867.36
+margin_bottom = 191.441
+color = Color( 0.396078, 0.380392, 0.501961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Search Bar" type="LineEdit" parent="Home"]
+margin_left = 46.206
+margin_top = 28.3653
+margin_right = 424.206
+margin_bottom = 92.3653
+custom_fonts/font = ExtResource( 1 )
+align = 3
+placeholder_text = "Search for a memory here!"
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Add New Memory" type="Button" parent="Home"]
+margin_left = 1579.01
+margin_top = 985.0
+margin_right = 1873.01
+margin_bottom = 1047.0
+custom_fonts/font = ExtResource( 1 )
+text = "Add a New Memory"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Button" parent="Home"]
+margin_left = 1763.33
+margin_top = 25.0062
+margin_right = 1873.33
+margin_bottom = 87.0062
+custom_fonts/font = ExtResource( 1 )
+text = "Music"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons Container" type="HBoxContainer" parent="Home"]
+margin_left = 47.0
+margin_top = 985.0
+margin_right = 706.0
+margin_bottom = 1047.0
+rect_min_size = Vector2( 0, 62 )
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="View Memory" type="Button" parent="Home/Buttons Container"]
+margin_right = 204.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 1 )
+disabled = true
+text = "View Memory"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Edit Memory" type="Button" parent="Home/Buttons Container"]
+margin_left = 224.0
+margin_right = 412.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 1 )
+disabled = true
+text = "Edit Memory"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Delete Memory" type="Button" parent="Home/Buttons Container"]
+margin_left = 432.0
+margin_right = 659.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 1 )
+disabled = true
+text = "Delete Memory"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Memories Container" type="ScrollContainer" parent="Home"]
+margin_left = 77.0
+margin_top = 198.0
+margin_right = 1873.0
+margin_bottom = 942.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Home/Memories Container"]
+margin_right = 1770.0
+margin_bottom = 75.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Memory" parent="Home/Memories Container/VBoxContainer" instance=ExtResource( 6 )]
+
+[node name="Menu Verticals" type="Control" parent="Home"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Vertical" type="ColorRect" parent="Home/Menu Verticals"]
+margin_left = 337.0
+margin_top = 109.0
+margin_right = 349.0
+margin_bottom = 955.0
+mouse_filter = 2
+color = Color( 0.396078, 0.380392, 0.501961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Vertical2" type="ColorRect" parent="Home/Menu Verticals"]
+margin_left = 540.0
+margin_top = 106.279
+margin_right = 552.0
+margin_bottom = 952.279
+mouse_filter = 2
+color = Color( 0.396078, 0.380392, 0.501961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Vertical3" type="ColorRect" parent="Home/Menu Verticals"]
+margin_left = 775.0
+margin_top = 107.64
+margin_right = 787.0
+margin_bottom = 953.64
+mouse_filter = 2
+color = Color( 0.396078, 0.380392, 0.501961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Vertical4" type="ColorRect" parent="Home/Menu Verticals"]
+margin_left = 1170.0
+margin_top = 113.081
+margin_right = 1182.0
+margin_bottom = 959.081
+mouse_filter = 2
+color = Color( 0.396078, 0.380392, 0.501961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Vertical5" type="ColorRect" parent="Home/Menu Verticals"]
+margin_left = 1530.05
+margin_top = 110.36
+margin_right = 1542.05
+margin_bottom = 956.36
+mouse_filter = 2
+color = Color( 0.396078, 0.380392, 0.501961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu Labels" type="Control" parent="Home"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="Home/Menu Labels"]
+margin_left = 164.48
+margin_top = 122.554
+margin_right = 245.48
+margin_bottom = 168.554
+custom_fonts/font = ExtResource( 1 )
+text = "Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Date" type="Label" parent="Home/Menu Labels"]
+margin_left = 410.0
+margin_top = 122.554
+margin_right = 475.0
+margin_bottom = 168.554
+custom_fonts/font = ExtResource( 1 )
+text = "Date"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Location" type="Label" parent="Home/Menu Labels"]
+margin_left = 610.0
+margin_top = 123.662
+margin_right = 726.0
+margin_bottom = 169.662
+custom_fonts/font = ExtResource( 1 )
+text = "Location"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="Home/Menu Labels"]
+margin_left = 900.0
+margin_top = 122.554
+margin_right = 1057.0
+margin_bottom = 168.554
+custom_fonts/font = ExtResource( 1 )
+text = "Description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="How Long Ago" type="Label" parent="Home/Menu Labels"]
+margin_left = 1260.0
+margin_top = 122.554
+margin_right = 1463.0
+margin_bottom = 168.554
+custom_fonts/font = ExtResource( 1 )
+text = "How Long Ago"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Media" type="Label" parent="Home/Menu Labels"]
+margin_left = 1660.0
+margin_top = 122.554
+margin_right = 1745.0
+margin_bottom = 168.554
+custom_fonts/font = ExtResource( 1 )
+text = "Media"
+
+[node name="Add a New Memory" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 4 )
+
+[node name="Name" type="LineEdit" parent="Add a New Memory"]
+margin_left = 160.0
+margin_top = 52.0
+margin_right = 626.0
+margin_bottom = 108.0
+focus_next = NodePath("../Date")
+custom_fonts/font = ExtResource( 1 )
+expand_to_text_length = true
+placeholder_text = "Required"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name Label" type="Label" parent="Add a New Memory"]
+margin_left = 55.0
+margin_top = 54.0
+margin_right = 144.0
+margin_bottom = 100.0
+custom_fonts/font = ExtResource( 1 )
+text = "Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Date" type="LineEdit" parent="Add a New Memory"]
+margin_left = 160.0
+margin_top = 144.0
+margin_right = 356.0
+margin_bottom = 200.0
+hint_tooltip = "Use slashes (4/9/2020) or type it out (April 9, 2019)"
+focus_next = NodePath("../Location")
+focus_previous = NodePath("../Name")
+custom_fonts/font = ExtResource( 1 )
+expand_to_text_length = true
+placeholder_text = "Required"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Date Label" type="Label" parent="Add a New Memory"]
+margin_left = 71.0
+margin_top = 148.0
+margin_right = 144.0
+margin_bottom = 194.0
+hint_tooltip = "Use slashes (4/9/2020) or type it out (April 9, 2019)"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 1 )
+text = "Date:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Location" type="LineEdit" parent="Add a New Memory"]
+margin_left = 160.0
+margin_top = 234.0
+margin_right = 300.0
+margin_bottom = 290.0
+focus_next = NodePath("../Description")
+focus_previous = NodePath("../Date")
+custom_fonts/font = ExtResource( 1 )
+expand_to_text_length = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Location Label" type="Label" parent="Add a New Memory"]
+margin_left = 20.0
+margin_top = 238.0
+margin_right = 144.0
+margin_bottom = 284.0
+custom_fonts/font = ExtResource( 1 )
+text = "Location:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="TextEdit" parent="Add a New Memory"]
+margin_left = 232.0
+margin_top = 335.0
+margin_right = 941.0
+margin_bottom = 650.0
+focus_next = NodePath("../Tags")
+focus_previous = NodePath("../Location")
+custom_fonts/font = SubResource( 1 )
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description Label" type="Label" parent="Add a New Memory"]
+margin_left = 50.0
+margin_top = 327.612
+margin_right = 215.0
+margin_bottom = 373.612
+custom_fonts/font = ExtResource( 1 )
+text = "Description:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Media" type="ItemList" parent="Add a New Memory"]
+margin_left = 977.0
+margin_top = 118.0
+margin_right = 1877.0
+margin_bottom = 950.0
+hint_tooltip = "Drag and drop photos or videos here from your computer to add them!"
+custom_constants/vseparation = 0
+custom_constants/line_separation = 0
+custom_constants/icon_margin = 0
+custom_constants/hseparation = 0
+max_columns = 3
+fixed_icon_size = Vector2( 293, 293 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Media Label" type="Label" parent="Add a New Memory"]
+margin_left = 977.0
+margin_top = 70.971
+margin_right = 1347.0
+margin_bottom = 116.971
+custom_fonts/font = ExtResource( 1 )
+text = "Media (photos and videos):"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tags" type="LineEdit" parent="Add a New Memory"]
+margin_left = 160.0
+margin_top = 676.285
+margin_right = 942.0
+margin_bottom = 732.285
+hint_tooltip = "To delete a tag, click on it"
+focus_previous = NodePath("../Description")
+custom_fonts/font = ExtResource( 1 )
+placeholder_text = "Type a tag here and press enter to add to the list of tags"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tags Label" type="Label" parent="Add a New Memory"]
+margin_left = 74.0
+margin_top = 679.0
+margin_right = 144.0
+margin_bottom = 725.0
+hint_tooltip = "To delete a tag, click on it"
+mouse_filter = 1
+custom_fonts/font = ExtResource( 1 )
+text = "Tags:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tags Scroll Container" type="ScrollContainer" parent="Add a New Memory"]
+margin_left = 74.0
+margin_top = 751.0
+margin_right = 945.0
+margin_bottom = 1037.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tags VBox" type="VBoxContainer" parent="Add a New Memory/Tags Scroll Container"]
+rect_clip_content = true
+size_flags_horizontal = 2
+size_flags_vertical = 2
+size_flags_stretch_ratio = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save" type="Button" parent="Add a New Memory"]
+margin_left = 1677.0
+margin_top = 965.668
+margin_right = 1877.0
+margin_bottom = 1027.67
+custom_fonts/font = ExtResource( 1 )
+text = "Save Memory"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back to Memories" type="Button" parent="Add a New Memory"]
+margin_left = 1617.2
+margin_top = 40.816
+margin_right = 1874.2
+margin_bottom = 102.816
+custom_fonts/font = ExtResource( 1 )
+text = "Back to Memories"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="View Memory" type="Node2D" parent="."]
+visible = false
+
+[node name="Music" type="Node2D" parent="."]
+visible = false
+[connection signal="text_changed" from="Home/Search Bar" to="Home" method="_on_Search_Bar_text_changed"]
+[connection signal="pressed" from="Home/Add New Memory" to="." method="_on_Add_New_Memory_pressed"]
+[connection signal="text_entered" from="Add a New Memory/Tags" to="Add a New Memory" method="_on_Tags_text_entered"]
+[connection signal="pressed" from="Add a New Memory/Save" to="Add a New Memory" method="_on_Save_pressed"]
+[connection signal="pressed" from="Add a New Memory/Back to Memories" to="." method="on_Back_to_Memories_pressed"]

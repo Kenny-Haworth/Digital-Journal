@@ -1,0 +1,133 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts/Romanica-Bg4l.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 15
+extra_spacing_bottom = -7
+font_data = ExtResource( 1 )
+
+[node name="Memory_Preview" type="Panel"]
+margin_right = 1770.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 1770, 75 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1763.0
+margin_bottom = 68.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="."]
+margin_left = 2.293
+margin_top = 8.271
+margin_right = 26.293
+margin_bottom = 32.271
+rect_min_size = Vector2( 24, 24 )
+rect_scale = Vector2( 2.5, 2.5 )
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="."]
+margin_left = 50.0
+margin_top = 11.0
+margin_right = 260.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 1 )
+text = "Long Beach Acquarium"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Date" type="Label" parent="."]
+margin_left = 273.0
+margin_top = 11.0
+margin_right = 462.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 1 )
+text = "September 22, 2020"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Location" type="Label" parent="."]
+margin_left = 475.0
+margin_top = 11.0
+margin_right = 699.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 1 )
+text = "Acquarium of the Pacific"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="."]
+margin_left = 713.0
+margin_top = 8.0
+margin_right = 1088.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 2 )
+text = "On this fateful day, we went to the acquarium of the Pacific! We had a fantastic time together, and we really enjoyed spending time with one another. This was one of our favorite dates. After we spent time in the acquarium, we went back outside to enjoy walking around the wooden board"
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="How Long Ago" type="Label" parent="."]
+margin_left = 1107.0
+margin_top = 11.0
+margin_right = 1452.0
+margin_bottom = 64.0
+custom_fonts/font = SubResource( 1 )
+text = "1 Year, 10 months, 3 weeks, 6 days ago"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Media" type="ItemList" parent="."]
+margin_left = 1470.0
+margin_top = 11.0
+margin_right = 1758.0
+margin_bottom = 64.0
+mouse_filter = 2
+custom_constants/vseparation = 4
+custom_constants/line_separation = 0
+custom_constants/icon_margin = 0
+custom_constants/hseparation = 4
+max_columns = 10
+fixed_icon_size = Vector2( 46, 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

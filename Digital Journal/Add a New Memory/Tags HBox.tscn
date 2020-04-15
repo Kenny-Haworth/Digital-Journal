@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="Tags HBox1" type="HBoxContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
