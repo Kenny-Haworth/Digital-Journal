@@ -35,5 +35,4 @@ Screenshots were made on 4/15/2020.
 
 This is the foremost project I am working on. Expect frequent updates until all of the planned features are added in.
 
-As of now, videos cannot be added and some images (such as .png) appear blank. Recommended photo format is .jpg.
-Also, please excuse the boot splash and project icon. This was designed as an anniversary gift to my girlfriend. In the final release version I will be sure to change these to make the project more generic.
+Please excuse the boot splash and project icon. This was designed as an anniversary gift to my girlfriend. In the final release version I will be sure to change these to make the project more generic.

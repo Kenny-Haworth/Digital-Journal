@@ -57,7 +57,7 @@ func _on_Save_pressed():
 	
 	get_parent().on_save_memory_pressed()
 	
-#saves the new memory to file
+#saves the new memory to file and generates thumbnails to save to file
 func _save_memory():
 	var saveFile = File.new()
 	saveFile.open("user://saved_memories.txt", File.READ_WRITE)
@@ -77,11 +77,25 @@ func _save_memory():
 	saveDictionary.Location = Location.text
 	saveDictionary.Description = Description.text
 	
+	#get the media paths to save and additionally save a thumbnail of each image for faster loading
 	var some_media: Array = Media.get_file_paths()
 	var other_media = []
 	
 	for media in some_media:
 		other_media.append(media)
+		var image = Image.new()
+		image.load(media)
+		image.resize(46, 40)
+		
+		#colons and backslashes are not allowed on windows OS
+		var converted_file_path_name = media.replace(":", "!")
+		converted_file_path_name = converted_file_path_name.replace("\\", "&")
+		var err = image.save_png("user://Thumbnails/" + converted_file_path_name)
+		if err != 0:
+			print("Error saving image!")
+			print("Media path:", media)
+			print("Converted path:", converted_file_path_name)
+			print("Error code:", err)
 	
 	saveDictionary.Media = other_media
 	Media.clear_file_paths()

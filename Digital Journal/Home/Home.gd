@@ -155,9 +155,13 @@ func _add_memory_to_home_screen(line: String, initialization: bool):
 		var media_list = cur_dict["Media"]
 
 		for media in media_list:
+			#load the thumbnail instead of the actual media on the home screen
+			var converted_file_path_name = media.replace(":", "!")
+			converted_file_path_name = converted_file_path_name.replace("\\", "&")
+			converted_file_path_name = "user://Thumbnails/" + converted_file_path_name
+			
 			var image = Image.new()
-			image.load(media)
-			image.resize(50, 50) #this is faster with scaling. Best to save the thumbnails first somehow though
+			image.load(converted_file_path_name)
 			var texture = ImageTexture.new()
 			texture.create_from_image(image)
 			
