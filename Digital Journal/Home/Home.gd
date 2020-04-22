@@ -1,7 +1,11 @@
 extends Node2D
 
+onready var View_Button = get_node("Buttons Container/View Memory")
+onready var Edit_Button = get_node("Buttons Container/Edit Memory")
+onready var Delete_Button = get_node("Buttons Container/Delete Memory")
+
 #to add memories to the container
-onready var Memories_Container = get_node("Memories Container/VBoxContainer")
+onready var Memories_Container = get_node("Memories Scroll Container/Memories Container")
 
 #to spawn a dynamic number of memories
 var Memory_Preview = preload("res://Home/Memory_Preview.tscn")
@@ -32,12 +36,16 @@ func populate_list():
 	#create the file if it does not exist
 	if not loadFile.file_exists("user://saved_memories.txt"):
 		loadFile.open("user://saved_memories.txt", File.WRITE)
+		loadFile.close()
 	
 	loadFile.open("user://saved_memories.txt", File.READ)
 	
 	#load each memory in and save it to the array of memories
+	var count = 0
+	
 	while not loadFile.eof_reached():
-		_add_memory_to_home_screen(loadFile.get_line(), true)
+		_add_memory_to_home_screen(loadFile.get_line(), count, true)
+		count+=1
 	
 	loadFile.close()
 
@@ -48,7 +56,7 @@ func _clear_home_screen_memories():
 
 #converts the given string into a memory and adds it to the home screen
 #additionally, adds the memory to the array of memories used for search queries if initialization is true
-func _add_memory_to_home_screen(line: String, initialization: bool):
+func _add_memory_to_home_screen(line: String, line_number: int, initialization: bool):
 	
 	#skip blank lines - Godot adds one in at the end of the file
 	if line == "":
@@ -63,6 +71,7 @@ func _add_memory_to_home_screen(line: String, initialization: bool):
 		var cur_dict = json.result
 		
 		new_memory = Memory_Preview.instance()
+		new_memory.set_line_number(line_number)
 		
 		var date: String = cur_dict["Date"]
 		var month
@@ -150,7 +159,6 @@ func _add_memory_to_home_screen(line: String, initialization: bool):
 		new_memory.get_node("How Long Ago").text = str(days_difference)
 		
 		#add valid media to the memory preview
-		#TODO this is an incredible slow code block, load only image previews. Downscale each image/use thumbnails
 		var media_preview = new_memory.get_node("Media")
 		var media_list = cur_dict["Media"]
 
@@ -158,7 +166,7 @@ func _add_memory_to_home_screen(line: String, initialization: bool):
 			#load the thumbnail instead of the actual media on the home screen
 			var converted_file_path_name = media.replace(":", "!")
 			converted_file_path_name = converted_file_path_name.replace("\\", "&")
-			converted_file_path_name = "user://Thumbnails/" + converted_file_path_name
+			converted_file_path_name = "user://Thumbnails/" + converted_file_path_name + ".png"
 			
 			var image = Image.new()
 			image.load(converted_file_path_name)
@@ -167,7 +175,6 @@ func _add_memory_to_home_screen(line: String, initialization: bool):
 			
 			media_preview.add_item("", texture, true)
 			media_preview.set_item_tooltip(media_preview.get_item_count() - 1, media)
-		#TODO this is an incredibly slow code block
 		
 		#add this memory to the array of all memories
 		if initialization:
@@ -217,7 +224,7 @@ func _on_Search_Bar_text_changed(query):
 				break
 		
 		if valid:
-			_add_memory_to_home_screen(line, false)
+			_add_memory_to_home_screen(line, counter, false)
 		
 		counter += 1
 	
@@ -322,3 +329,92 @@ func _convert_days_to_long_units(days: int, starting_month: int) -> String:
 		answer.erase(answer.length()-1, 1)
 	
 	return answer
+
+#enables the view, edit, and delete buttons
+func enable_buttons():
+	View_Button.disabled = false
+	Edit_Button.disabled = false
+	Delete_Button.disabled = false
+
+#disables the view, edit, and delete buttons
+func disable_buttons():
+	View_Button.disabled = true
+	Edit_Button.disabled = true
+	Delete_Button.disabled = true
+
+#delete the current memory
+func _on_Delete_Memory_pressed():
+	#first, find the memory that was selected
+	var memory_to_delete
+	
+	for child in Memories_Container.get_children():
+		if child.Checkbox.pressed:
+			memory_to_delete = child
+
+	#extract the line in the text file that is this save memory
+	var saveFile = File.new()
+	saveFile.open("user://saved_memories.txt", File.READ_WRITE)
+	var file_as_text = saveFile.get_as_text()
+	
+	for _i in range(memory_to_delete.line_number):
+		saveFile.get_line()
+	
+	var line_to_delete = saveFile.get_line()
+	saveFile.close()
+
+	#overwrite the file's contents and write the new file contents in with the line removed
+	file_as_text = file_as_text.replace(line_to_delete, "") #remove the memory to delete
+	file_as_text = file_as_text.replace("\n\n", "\n") #remove blank lines
+	file_as_text = file_as_text.lstrip("\n") #remove any extra new line at the beginning of the file (only occurs when the first memory is deleted)
+	file_as_text = file_as_text.rstrip("\n") #remove the extra new line at the end of the file
+	
+	saveFile.open("user://saved_memories.txt", File.WRITE)
+	saveFile.store_line(file_as_text)
+	saveFile.close()
+	
+	#additionally, remove any thumbnails associated with this memory
+	var json = JSON.parse(line_to_delete)
+	
+	if typeof(json.result) == TYPE_DICTIONARY:
+		var cur_dict = json.result
+		var media_list = cur_dict["Media"]
+		
+		for media in media_list:
+			#if the thumbnail is needed for any other memory besides this one, do not delete it
+			if not _media_in_other_memories(media):
+				var converted_file_path_name = media.replace(":", "!")
+				converted_file_path_name = converted_file_path_name.replace("\\", "&")
+				var dir = Directory.new()
+				dir.remove("user://Thumbnails/" + converted_file_path_name + ".png")
+
+	#disable the buttons
+	disable_buttons()
+	
+	#now repopulate the list
+	populate_list()
+
+#returns true if this media is in other memories, false otherwise
+func _media_in_other_memories(media: String) -> bool:
+	var saveFile = File.new()
+	saveFile.open("user://saved_memories.txt", File.READ)
+	
+	#check against all other media saved in other memories
+	while not saveFile.eof_reached():
+		var line = saveFile.get_line()
+		
+		if line == "":
+			continue
+		
+		var saved_json = JSON.parse(line)
+
+		if typeof(saved_json.result) == TYPE_DICTIONARY:
+			var saved_dict = saved_json.result
+			var saved_media_list = saved_dict["Media"]
+
+			for saved_media in saved_media_list:
+				if media == saved_media:
+					saveFile.close()
+					return true
+	
+	saveFile.close()
+	return false

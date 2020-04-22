@@ -144,7 +144,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Memories Container" type="ScrollContainer" parent="Home"]
+[node name="Memories Scroll Container" type="ScrollContainer" parent="Home"]
 margin_left = 77.0
 margin_top = 198.0
 margin_right = 1873.0
@@ -155,13 +155,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Home/Memories Container"]
+[node name="Memories Container" type="VBoxContainer" parent="Home/Memories Scroll Container"]
 margin_right = 1770.0
 margin_bottom = 75.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
-[node name="Memory" parent="Home/Memories Container/VBoxContainer" instance=ExtResource( 6 )]
+[node name="Memory" parent="Home/Memories Scroll Container/Memories Container" instance=ExtResource( 6 )]
 
 [node name="Menu Verticals" type="Control" parent="Home"]
 margin_right = 40.0
@@ -500,6 +500,7 @@ visible = false
 visible = false
 [connection signal="text_changed" from="Home/Search Bar" to="Home" method="_on_Search_Bar_text_changed"]
 [connection signal="pressed" from="Home/Add New Memory" to="." method="_on_Add_New_Memory_pressed"]
+[connection signal="pressed" from="Home/Buttons Container/Delete Memory" to="Home" method="_on_Delete_Memory_pressed"]
 [connection signal="text_entered" from="Add a New Memory/Tags" to="Add a New Memory" method="_on_Tags_text_entered"]
 [connection signal="pressed" from="Add a New Memory/Save" to="Add a New Memory" method="_on_Save_pressed"]
 [connection signal="pressed" from="Add a New Memory/Back to Memories" to="." method="on_Back_to_Memories_pressed"]

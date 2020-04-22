@@ -90,7 +90,14 @@ func _save_memory():
 		#colons and backslashes are not allowed on windows OS
 		var converted_file_path_name = media.replace(":", "!")
 		converted_file_path_name = converted_file_path_name.replace("\\", "&")
-		var err = image.save_png("user://Thumbnails/" + converted_file_path_name)
+		
+		#if the thumbnails folder does not exist, create it
+		var thumbnail_dir = Directory.new()
+		if not thumbnail_dir.dir_exists("user://Thumbnails"):
+			thumbnail_dir.open("user://")
+			thumbnail_dir.make_dir("Thumbnails")
+		
+		var err = image.save_png("user://Thumbnails/" + converted_file_path_name + ".png")
 		if err != 0:
 			print("Error saving image!")
 			print("Media path:", media)

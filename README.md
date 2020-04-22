@@ -10,6 +10,7 @@
   - The home screen displays a list of current memories and their name, date, location, description, how long ago they occurred, and media.
 - Search for memories
   - The user can narrow down to specific memories using the search bar (case insensitive). Memories can be found by typing their name, date, location, or any of their tags. Multiple search parameters can be used by separating keywords with a space.
+- Delete memories
 
 # Screenshots
 
@@ -26,8 +27,6 @@ Screenshots were made on 4/15/2020.
   - Select an existing memory and view all parts of the memory, including full resolution photos and videos.
 - Edit memories
   - Select an existing memory and edit any of its information.
-- Delete memories
-  - Delete an existing memory.
 - Music
   - A tab to add music into the program. Play, pause, and shuffle music with simple controls. The user may add their own music in and create their own playlists to shuffle.
 

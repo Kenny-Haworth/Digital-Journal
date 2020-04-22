@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/Romanica-Bg4l.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Home/Memory_Preview.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -17,6 +18,7 @@ margin_bottom = 75.0
 rect_min_size = Vector2( 1770, 75 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -131,3 +133,4 @@ fixed_icon_size = Vector2( 46, 40 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="toggled" from="CheckBox" to="." method="_on_CheckBox_toggled"]
