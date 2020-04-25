@@ -6,6 +6,8 @@
 
 - Add new memories (journal entries)
   - Memories contain a mandatory name and date and optional location, description, tags, and media (photos and videos). Use "Tab" to easily change between text fields, and drag and drop media from your computer into the program to add them.
+- Edit memories
+  - Select an existing memory and edit any of its information.
 - Preview memories
   - The home screen displays a list of current memories and their name, date, location, description, how long ago they occurred, and media.
 - Search for memories
@@ -25,13 +27,9 @@ Screenshots were made on 4/15/2020.
 
 - View memories
   - Select an existing memory and view all parts of the memory, including full resolution photos and videos.
-- Edit memories
-  - Select an existing memory and edit any of its information.
 - Music
   - A tab to add music into the program. Play, pause, and shuffle music with simple controls. The user may add their own music in and create their own playlists to shuffle.
 
 # Development Notes
 
 This is the foremost project I am working on. Expect frequent updates until all of the planned features are added in.
-
-Please excuse the boot splash and project icon. This was designed as an anniversary gift to my girlfriend. In the final release version I will be sure to change these to make the project more generic.

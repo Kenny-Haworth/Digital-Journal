@@ -1,5 +1,8 @@
 extends Node2D
 
+onready var Journal = get_parent()
+
+#buttons
 onready var View_Button = get_node("Buttons Container/View Memory")
 onready var Edit_Button = get_node("Buttons Container/Edit Memory")
 onready var Delete_Button = get_node("Buttons Container/Delete Memory")
@@ -20,11 +23,12 @@ var array_of_memories = []
 var Memory = load("res://Home/Memory.gd")
 
 func _ready():
-	populate_list()
+	populate_list(true)
 
 #adds all memories to the viewing list by reading from the saved memories file
-#and saves all memories to an array of memories
-func populate_list():
+#and saves all memories to an array of memories. If query is true, additionally
+#filters the list by first checking the query in the search bar
+func populate_list(query: bool):
 	
 	#clear the current list of memories first
 	_clear_home_screen_memories()
@@ -48,6 +52,9 @@ func populate_list():
 		count+=1
 	
 	loadFile.close()
+	
+	if query:
+		on_Search_Bar_text_changed("get_current_search_query")
 
 #clears the current list of memories
 func _clear_home_screen_memories():
@@ -183,11 +190,16 @@ func _add_memory_to_home_screen(line: String, line_number: int, initialization: 
 	Memories_Container.add_child(new_memory)
 
 #updates the current memories to be shown based upon the entered text
-func _on_Search_Bar_text_changed(query):
+func on_Search_Bar_text_changed(query):
+	
+	#if the query is this special string, it is being called by another method and not
+	#the search bar node and thus needs to grab the current text
+	if query == "get_current_search_query":
+		query = get_node("Search Bar").text
 	
 	#if there is no text entered (AKA the user backspaced to nothing), load the whole list in
 	if query == "":
-		populate_list()
+		populate_list(false)
 		return
 	
 	#ignore punctuation and leading and trailing spaces entered by the user
@@ -259,8 +271,8 @@ func _convert_days_to_long_units(days: int, starting_month: int) -> String:
 	
 	var answer = ""
 	
-	#calculate the number of years
-	var years = days/365
+	#calculate the number of years (the debugger complains about loss of precision unless casted to a float and back to an int)
+	var years: int = int(days/float(365))
 	
 	#append the string of years
 	if years >= 2:
@@ -274,7 +286,7 @@ func _convert_days_to_long_units(days: int, starting_month: int) -> String:
 	var counter = 0
 	
 	while days_left - days_per_month[starting_month+counter-1] >= 0:
-		days_left -= days_per_month[starting_month+counter-1] #92
+		days_left -= days_per_month[starting_month+counter-1]
 		number_of_months += 1
 		counter += 1
 		
@@ -345,11 +357,7 @@ func disable_buttons():
 #delete the current memory
 func _on_Delete_Memory_pressed():
 	#first, find the memory that was selected
-	var memory_to_delete
-	
-	for child in Memories_Container.get_children():
-		if child.Checkbox.pressed:
-			memory_to_delete = child
+	var memory_to_delete = get_selected_memory()
 
 	#extract the line in the text file that is this save memory
 	var saveFile = File.new()
@@ -373,48 +381,19 @@ func _on_Delete_Memory_pressed():
 	saveFile.close()
 	
 	#additionally, remove any thumbnails associated with this memory
-	var json = JSON.parse(line_to_delete)
-	
-	if typeof(json.result) == TYPE_DICTIONARY:
-		var cur_dict = json.result
-		var media_list = cur_dict["Media"]
-		
-		for media in media_list:
-			#if the thumbnail is needed for any other memory besides this one, do not delete it
-			if not _media_in_other_memories(media):
-				var converted_file_path_name = media.replace(":", "!")
-				converted_file_path_name = converted_file_path_name.replace("\\", "&")
-				var dir = Directory.new()
-				dir.remove("user://Thumbnails/" + converted_file_path_name + ".png")
+	Journal.delete_all_thumbnails(line_to_delete)
 
 	#disable the buttons
 	disable_buttons()
 	
 	#now repopulate the list
-	populate_list()
+	on_Search_Bar_text_changed("get_current_search_query")
 
-#returns true if this media is in other memories, false otherwise
-func _media_in_other_memories(media: String) -> bool:
-	var saveFile = File.new()
-	saveFile.open("user://saved_memories.txt", File.READ)
+#returns the selected memory
+func get_selected_memory() -> Panel:
+	for child in Memories_Container.get_children():
+		if child.Checkbox.pressed:
+			return child
 	
-	#check against all other media saved in other memories
-	while not saveFile.eof_reached():
-		var line = saveFile.get_line()
-		
-		if line == "":
-			continue
-		
-		var saved_json = JSON.parse(line)
-
-		if typeof(saved_json.result) == TYPE_DICTIONARY:
-			var saved_dict = saved_json.result
-			var saved_media_list = saved_dict["Media"]
-
-			for saved_media in saved_media_list:
-				if media == saved_media:
-					saveFile.close()
-					return true
-	
-	saveFile.close()
-	return false
+	print("Error! Unable to find selected memory.")
+	return null

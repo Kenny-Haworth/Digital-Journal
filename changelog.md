@@ -1,10 +1,24 @@
 # Digital Journal Changelog
 
+**"Edit"** update, <ins>April 25, 2020</ins>.
+
+**Changes:**
+- The user may now edit memories by selecting a memory and pressing "Edit Memory".
+- The user may now delete photos by double clicking on them when on the "add a new memory" or "edit memory" windows.
+- Added labels to the "add a new memory" and "edit memory" windows to inform the user of the menu they are currently viewing.
+- The application window now maximizes automatically upon startup to avoid screen sizing issues.
+
+**Bugfixes:**
+- When the user has filtered down memories and then adds a new one, the list is no longer repopulated without the current search query filter active.
+- When the user has filtered down memories and then deletes one, the list is no longer repopulated without the current search query filter active.
+
+<hr />
+
 **"Delete"** update, <ins>April 21, 2020</ins>.
 
 **Changes:**
 - The checkboxes next to memories are now mutually exclusive and enable the view, edit, and delete memory buttons.
-- The user may now delete memories by selecting a memory and pressing "delete".
+- The user may now delete memories by selecting a memory and pressing "Delete Memory".
 
 **Bugfixes:**
 

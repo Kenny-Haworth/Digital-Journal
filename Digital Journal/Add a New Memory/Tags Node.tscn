@@ -6,7 +6,7 @@
 [node name="Tags Node" type="Button"]
 margin_left = 258.0
 margin_top = 102.0
-margin_right = 343.0
+margin_right = 270.0
 margin_bottom = 158.0
 rect_clip_content = true
 size_flags_horizontal = 0

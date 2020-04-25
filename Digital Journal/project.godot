@@ -16,7 +16,6 @@ _global_script_class_icons={
 [application]
 
 config/name="Digital Journal"
-config/description="A 1 year anniversary gift for Kayley. It contains a list of events and when they occurred in time. There is a search bar, allowing events to easily be found by name or description, and each event has information about how long ago it happened. New events can be made and current events edited. Each event contains a date, name, optional time, optional description, and optional photos. When clicking on an event, one can then view or edit the event."
 run/main_scene="res://Journal.tscn"
 boot_splash/image="res://Splash and Icon/Boot Splash.PNG"
 boot_splash/bg_color=Color( 0.0745098, 0, 0.501961, 1 )
