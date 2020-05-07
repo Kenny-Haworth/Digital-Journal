@@ -6,8 +6,8 @@
 [ext_resource path="res://Add a New Memory.gd" type="Script" id=4]
 [ext_resource path="res://Home/Home.gd" type="Script" id=5]
 [ext_resource path="res://Home/Memory_Preview.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Add a New Memory/Media.gd" type="Script" id=7]
 [ext_resource path="res://Edit/Edit.gd" type="Script" id=8]
+[ext_resource path="res://Edit/Media.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -25,10 +25,9 @@ font_data = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="Backdrop" type="ColorRect" parent="."]
-margin_left = 1.84088
-margin_top = -2.29278
-margin_right = 1921.84
-margin_bottom = 1077.71
+margin_top = 2.58472
+margin_right = 1920.0
+margin_bottom = 1082.58
 color = Color( 0.0745098, 0, 0.501961, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -403,9 +402,11 @@ margin_bottom = 650.0
 focus_next = NodePath("../Tags")
 focus_previous = NodePath("../Location")
 custom_fonts/font = SubResource( 2 )
+smooth_scrolling = true
 wrap_enabled = true
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_editor_description_": ""
 }
 
 [node name="Description Label" type="Label" parent="Add a New Memory"]
@@ -424,16 +425,17 @@ margin_left = 977.0
 margin_top = 118.0
 margin_right = 1877.0
 margin_bottom = 950.0
-hint_tooltip = "Drag and drop photos or videos here from your computer to add them! Double click on them to remove them."
+hint_tooltip = "Drag and drop photos or videos here from your computer to add them!"
 custom_constants/vseparation = 0
 custom_constants/line_separation = 0
 custom_constants/icon_margin = 0
 custom_constants/hseparation = 0
+allow_reselect = true
 max_columns = 3
 fixed_icon_size = Vector2( 293, 293 )
-script = ExtResource( 7 )
+script = ExtResource( 9 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_editor_description_": ""
 }
 
 [node name="Media Label" type="Label" parent="Add a New Memory"]
@@ -487,6 +489,7 @@ rect_clip_content = true
 size_flags_horizontal = 2
 size_flags_vertical = 2
 size_flags_stretch_ratio = 0.0
+custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -644,7 +647,7 @@ custom_constants/hseparation = 0
 allow_reselect = true
 max_columns = 3
 fixed_icon_size = Vector2( 293, 293 )
-script = ExtResource( 7 )
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -700,6 +703,7 @@ rect_clip_content = true
 size_flags_horizontal = 2
 size_flags_vertical = 2
 size_flags_stretch_ratio = 0.0
+custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }

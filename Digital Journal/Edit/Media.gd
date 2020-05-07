@@ -23,7 +23,7 @@ func _files_dropped(files: PoolStringArray, _screen):
 		var texture = ImageTexture.new()
 		texture.create_from_image(image)
 		
-		add_item("", texture, true)
+		add_icon_item(texture, true)
 		set_item_tooltip(get_item_count() - 1, file)
 
 #returns true if this file is already included
@@ -46,4 +46,3 @@ func get_file_paths() -> Array:
 #remove media if it double-clicked on
 func _on_Media_item_activated(index):
 	remove_item(index)
-	

@@ -192,6 +192,10 @@ func _add_memory_to_home_screen(line: String, line_number: int, initialization: 
 #updates the current memories to be shown based upon the entered text
 func on_Search_Bar_text_changed(query):
 	
+	#when a query is entered in the search bar, all selected memories are unselected,
+	#so ensure the buttons are disabled
+	disable_buttons()
+	
 	#if the query is this special string, it is being called by another method and not
 	#the search bar node and thus needs to grab the current text
 	if query == "get_current_search_query":

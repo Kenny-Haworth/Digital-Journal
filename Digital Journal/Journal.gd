@@ -4,8 +4,11 @@ onready var Home = get_node("Home")
 onready var Add_a_New_Memory = get_node("Add a New Memory")
 onready var Edit = get_node("Edit")
 
-#maximizes the window on startup to avoid size issues with different screens
+#centers and maximizes the window on startup to avoid size issues with different screens
 func _ready():
+	var screen_size = OS.get_screen_size()
+	var window_size = OS.get_window_size()
+	OS.set_window_position(screen_size*0.5 - window_size*0.5)
 	OS.set_window_maximized(true)
 
 #takes the user to adding a new memory screen

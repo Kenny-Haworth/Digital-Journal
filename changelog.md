@@ -1,5 +1,22 @@
 # Digital Journal Changelog
 
+**"Bugfixes"** update, <ins>May 3, 2020</ins>.
+
+**Bugfixes:**
+- If the user selects a memory and then types in the search bar, the view, edit, and delete memory buttons can no longer be pressed, preventing loading of null memories (which caused a crash).
+- If the user is typing a long description and it extends past the size of the window, the scroll bar now...
+  - Moves with the text.
+  - Does not show half lines.
+- The window no longer shows space outside the viewport (what the user is supposed to see).
+- The window now centers in the middle of the screen on startup to fix screen sizing issues.
+- Tags entered on the "add a new memory" and "edit memory" windows now have the same seperation horizontally and vertically.
+
+**Additional Notes:**
+
+This update took longer due to the nature of these bugs. Some were obscure or difficult to reproduce, and others were difficult to fix thanks to restrictions from the Godot Engine. There is still an existing bug where photos are not rotated properly when loading in, which will be fixed in a later update.
+
+<hr />
+
 **"Edit"** update, <ins>April 25, 2020</ins>.
 
 **Changes:**
